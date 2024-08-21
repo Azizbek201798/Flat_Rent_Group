@@ -1,6 +1,7 @@
 <?php
 
 use App\Ads;
+use App\Status;
 
 function dd($args)
 {
@@ -20,6 +21,10 @@ function loadPartials(string $path, array|null $args = null): void
 function getAds(): array
 {
     return (new Ads())->getAds();
+}
+function getStatuses(): array
+{
+    return (new Status())->getStatuses();
 }
 
 function basePath(string $path): string
