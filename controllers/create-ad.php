@@ -4,4 +4,4 @@ declare(strict_types=1);
 
 $branches = (new \App\Branch())->getBranches();
 
-loadView('dashboard/create_ad', ['branches' => $branches]);
+loadView('dashboard/create_ad', ['branches' => $branches]);git checkout <branch-name>
