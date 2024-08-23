@@ -69,7 +69,8 @@ class User
 // Authorization;
    public function login(string $email)
    {
-       $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE `email` = :email");
+
+    $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE `email` = :email");
        $stmt->bindParam(':email', $email);
        $stmt->execute();
 
