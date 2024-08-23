@@ -1,30 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Ads;
-use App\Status;
 
 function dd($args)
 {
-    echo '<pre>';
-    var_dump($args);
-    echo '</pre>';
+    echo "<pre>";
+    print_r($args);
+    echo "</pre>";
     die();
 }
-function loadPartials(string $path, array|null $args = null): void
-{
-    if (is_array($args)) {
-        extract($args);
-    }
-    require basePath('/public/partials/'.$path.'.php');
-}
 
-function getAds(): array
+function getAds(): false|array
 {
     return (new Ads())->getAds();
-}
-function getStatuses(): array
-{
-    return (new Status())->getStatuses();
 }
 
 function basePath(string $path): string
@@ -34,10 +24,25 @@ function basePath(string $path): string
 
 function loadView(string $path, array|null $args = null): void
 {
+    $filePath = basePath('/public/pages/' . $path . '.php');
+    if (!file_exists($filePath)) {
+        echo "Required view not found: $filePath";
+        return;
+    }
+
     if (is_array($args)) {
         extract($args);
     }
-    require basePath('/public/pages/' . $path . '.php');
+
+    require $filePath;
+}
+
+function loadPartials(string $path, array|null $args = null): void
+{
+    if (is_array($args)) {
+        extract($args);
+    }
+    require basePath('/public/partials/' . $path . '.php');
 }
 
 function loadController(string $path, array|null $args = null): void

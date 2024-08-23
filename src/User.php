@@ -1,9 +1,7 @@
 <?php
 
 declare(strict_types=1);
-
 namespace App;
-
 use PDO;
 
 class User
@@ -12,7 +10,7 @@ class User
 
     public function __construct()
     {
-        $this->pdo = Db::connect();
+        $this->pdo = DB::connect();
     }
 
     public function createUser(
@@ -120,7 +118,6 @@ class User
            $stmt->bindParam(':password', $password);
            $stmt->execute();
 
-           //Fetch last created user
            $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE `email` = :email");
            $stmt->bindParam(':email', $email);
            $stmt->execute();
